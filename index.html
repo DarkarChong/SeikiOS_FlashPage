@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEIKIOS — Restoring Your Gaming Memories</title>
+  <meta name="description" content="Non-profit Flash game preservation. Patched SWF games running directly in your browser via Ruffle.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Ruffle Flash emulator -->
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">S</div>
+      SEIKIOS
+    </div>
+    <nav>
+      <a href="#catalog">Games</a>
+      <a href="#about">About</a>
+      <a href="https://github.com" target="_blank">GitHub</a>
+    </nav>
+  </header>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <h1>Restoring Your<br><span>Gaming Memories</span></h1>
+    <p>
+      Flash is gone — but the games don't have to be.<br>
+      We patch broken AS2 code and run everything directly in your browser using Ruffle.
+    </p>
+    <div class="stats">
+      <div class="stat">
+        <div class="n" id="stat-games">—</div>
+        <div class="l">Games preserved</div>
+      </div>
+      <div class="stat">
+        <div class="n" id="stat-bugs">—</div>
+        <div class="l">Bugs patched</div>
+      </div>
+      <div class="stat">
+        <div class="n">100%</div>
+        <div class="l">Browser native</div>
+      </div>
+      <div class="stat">
+        <div class="n">Free</div>
+        <div class="l">Always non-profit</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CATALOG ── -->
+  <main class="catalog-section" id="catalog">
+    <div class="section-title">Games</div>
+    <div class="grid" id="game-grid">
+      <!-- filled by catalog.js -->
+      <div style="color:var(--muted); font-size:.9rem;">Loading…</div>
+    </div>
+  </main>
+
+  <!-- ── ABOUT ── -->
+  <section class="catalog-section" id="about">
+    <div class="section-title">About</div>
+    <p style="color:var(--muted); line-height:1.8; max-width:640px; font-size:.95rem;">
+      SEIKIOS is a non-profit Flash game preservation project. We manually decompile broken SWF files
+      using <strong style="color:var(--text)">JPEXS Free Flash Decompiler</strong>, fix AS2 code bugs,
+      and publish the patched games running via <strong style="color:var(--text)">Ruffle</strong> — an
+      open-source Flash emulator.<br><br>
+      All rights belong to their original creators. If you are a rights holder and want a game removed,
+      please open a GitHub issue.
+    </p>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <p>SEIKIOS — Flash Game Preservation Project</p>
+    <p>Non-profit · All rights belong to original creators · Powered by <a href="https://ruffle.rs" target="_blank">Ruffle</a></p>
+  </footer>
+
+  <script src="assets/js/catalog.js"></script>
+</body>
+</html>

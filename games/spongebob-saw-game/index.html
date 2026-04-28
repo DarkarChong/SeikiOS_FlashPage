@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spongebob Saw Game — SEIKIOS</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+  <style>
+    .game-layout { max-width: 900px; margin: 0 auto; padding: 2rem; }
+
+    .breadcrumb {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .breadcrumb a { color: var(--accent); }
+    .breadcrumb a:hover { color: var(--gold); }
+
+    .game-title {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 900;
+      margin-bottom: .5rem;
+    }
+
+    .game-meta {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .player-wrap {
+      background: #000;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 2rem;
+      aspect-ratio: 4/3;
+      max-height: 540px;
+    }
+
+    #ruffle-player {
+      width: 100%;
+      height: 100%;
+    }
+
+    .patch-section { margin-top: 2rem; }
+
+    .patch-section h2 {
+      font-size: 1rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .bug-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    .bug-item {
+      background: var(--surface);
+      border: 1px solid #2a0606;
+      border-radius: var(--radius);
+      padding: .65rem 1rem;
+      font-size: .875rem;
+      display: flex;
+      gap: .75rem;
+      align-items: flex-start;
+    }
+
+    .bug-n {
+      color: var(--gold);
+      font-weight: 700;
+      min-width: 2rem;
+      font-size: .75rem;
+      padding-top: .1rem;
+    }
+
+    .bug-desc { color: var(--text); line-height: 1.5; }
+    .bug-file { color: var(--muted); font-size: .75rem; font-family: monospace; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <div class="logo-icon">S</div>
+      SEIKIOS
+    </div>
+    <nav>
+      <a href="../../#catalog">Games</a>
+      <a href="../../#about">About</a>
+      <a href="https://github.com" target="_blank">GitHub</a>
+    </nav>
+  </header>
+
+  <main class="game-layout">
+
+    <div class="breadcrumb">
+      <a href="../../">SEIKIOS</a> › Spongebob Saw Game
+    </div>
+
+    <h1 class="game-title">Spongebob Saw Game</h1>
+
+    <div class="game-meta">
+      <span class="badge badge-patched">✓ Patched</span>
+      <span class="badge badge-bugs">35 bugs fixed</span>
+      <span class="badge" style="background:#1a1010; color:var(--muted);">2009 · Point & Click</span>
+    </div>
+
+    <!-- RUFFLE PLAYER -->
+    <div class="player-wrap">
+      <div id="ruffle-player"></div>
+    </div>
+
+    <!-- PATCH LOG -->
+    <div class="patch-section">
+      <h2>Patch log — 35 bugs fixed</h2>
+      <ul class="bug-list" id="bug-list">
+        <!-- filled by inline script below -->
+      </ul>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>SEIKIOS — Flash Game Preservation Project</p>
+    <p>Non-profit · All rights belong to original creators · Powered by <a href="https://ruffle.rs" target="_blank">Ruffle</a></p>
+  </footer>
+
+  <script>
+    // ── Ruffle player ──
+    window.RufflePlayer = window.RufflePlayer || {};
+    window.addEventListener('load', () => {
+      const ruffle = window.RufflePlayer.newest();
+      const player = ruffle.createPlayer();
+      const container = document.getElementById('ruffle-player');
+      container.appendChild(player);
+      player.style.width  = '100%';
+      player.style.height = '100%';
+      player.load('game.swf');
+    });
+
+    // ── Bug list (fill in your 35 bugs here) ──
+    const bugs = [
+      { n: 1,  desc: 'Scene 1 exit button unresponsive — missing onRelease handler on btn_exit',          file: 'Scene1.as' },
+      { n: 2,  desc: 'Placeholder — add your bug description here',                                        file: '' },
+      // ... add the remaining 33 bugs
+    ];
+
+    const list = document.getElementById('bug-list');
+    list.innerHTML = bugs.map(b => `
+      <li class="bug-item">
+        <span class="bug-n">#${String(b.n).padStart(2,'0')}</span>
+        <div>
+          <div class="bug-desc">${b.desc}</div>
+          ${b.file ? `<div class="bug-file">${b.file}</div>` : ''}
+        </div>
+      </li>
+    `).join('');
+  </script>
+
+</body>
+</html>
