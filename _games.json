@@ -6,7 +6,7 @@
     "year": 2009,
     "tags": ["point-and-click", "horror", "spongebob"],
     "status": "patched",
-    "bugs_fixed": 35,
-    "description": "A horror parody of the Saw franchise featuring Spongebob characters. 35 AS2 bugs patched."
+    "bugs_fixed": 42,
+    "description": "A horror parody of the Saw franchise featuring Spongebob characters. 42 AS2 state machine bugs patched."
   }
 ]
