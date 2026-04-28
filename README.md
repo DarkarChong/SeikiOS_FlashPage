@@ -4,6 +4,8 @@
 
 Non-profit Flash game preservation project. We manually patch broken AS2 code using JPEXS Free Flash Decompiler and run every game directly in the browser via [Ruffle](https://ruffle.rs).
 
+Web Page: https://darkarchong.github.io/SeikiOS_FlashPage/
+
 ## How it works
 
 1. A broken `.swf` is decompiled with JPEXS Free Flash Decompiler
