@@ -1,12 +1,1 @@
-[
-  {
-    "id": "spongebob-saw-game",
-    "title": "Spongebob Saw Game",
-    "thumbnail": "games/spongebob-saw-game/thumbnail.png",
-    "year": 2009,
-    "tags": ["point-and-click", "horror", "spongebob"],
-    "status": "patched",
-    "bugs_fixed": 42,
-    "description": "A horror parody of the Saw franchise featuring Spongebob characters. 42 AS2 state machine bugs patched."
-  }
-]
+[]
