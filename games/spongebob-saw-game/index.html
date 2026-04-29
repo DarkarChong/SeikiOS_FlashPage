@@ -135,6 +135,10 @@
   <script>
     // ── Ruffle player ──
     window.RufflePlayer = window.RufflePlayer || {};
+    window.RufflePlayer.config = {
+      logLevel: "verbose",
+      warnOnUnsupportedContent: true,
+    };
     window.addEventListener('load', () => {
       const ruffle = window.RufflePlayer.newest();
       const player = ruffle.createPlayer();
