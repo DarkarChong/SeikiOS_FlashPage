@@ -2,7 +2,7 @@
   {
     "id": "spongebob-saw-game",
     "title": "Spongebob Saw Game",
-    "thumbnail": "games/spongebob-saw-game/thumbnail.png",
+    "thumbnail": "games/spongebob-saw-game/cover.svg",
     "status": "patched",
     "bugs_fixed": 43
   }
