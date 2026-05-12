@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "id": "spongebob-saw-game",
+    "title": "Spongebob Saw Game",
+    "thumbnail": "games/spongebob-saw-game/thumbnail.png",
+    "status": "patched",
+    "bugs_fixed": 43
+  }
+]
