@@ -53,8 +53,11 @@ header {
   border-radius: 6px;
   display: block;
   object-fit: cover;
-  border: 2px solid var(--gold);
+  border: 1px solid var(--gold);
   box-sizing: border-box;
+  box-shadow:
+    0 0 8px rgba(232, 180, 0, 0.35),
+    0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 nav { display: flex; gap: 1.5rem; font-size: .9rem; color: var(--text); opacity: .85; }
