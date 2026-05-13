@@ -45,9 +45,9 @@
       height: 100%;
     }
 
-    .patch-section { margin-top: 2rem; }
-
-    .patch-section h2 {
+    /* ── Section headings (shared) ── */
+    .rating-section, .comments-section { margin-top: 2.5rem; }
+    .rating-section h2, .comments-section h2 {
       font-size: 1rem;
       letter-spacing: .12em;
       text-transform: uppercase;
@@ -55,34 +55,48 @@
       margin-bottom: 1rem;
     }
 
-    .bug-list {
-      list-style: none;
+    /* ── Star rating ── */
+    .rating-row {
       display: flex;
-      flex-direction: column;
-      gap: .5rem;
-    }
-
-    .bug-item {
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
       background: var(--surface);
       border: 1px solid #2a0606;
       border-radius: var(--radius);
-      padding: .65rem 1rem;
+      padding: 1rem 1.25rem;
+    }
+    .stars { display: inline-flex; gap: .25rem; }
+    .star {
+      background: none;
+      border: none;
+      padding: 0 .15rem;
+      cursor: pointer;
+      font-size: 1.9rem;
+      line-height: 1;
+      color: #3a1a1a;
+      transition: color .15s ease, transform .1s ease;
+    }
+    .star:hover { transform: scale(1.15); }
+    .star.active   { color: var(--gold); }
+    .star.hovering { color: var(--gold); opacity: .8; }
+    .rating-your {
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    /* ── Comments ── */
+    .comments-placeholder {
+      background: var(--surface);
+      border: 1px dashed #2a0606;
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      color: var(--muted);
       font-size: .875rem;
-      display: flex;
-      gap: .75rem;
-      align-items: flex-start;
+      line-height: 1.5;
     }
-
-    .bug-n {
-      color: var(--gold);
-      font-weight: 700;
-      min-width: 2rem;
-      font-size: .75rem;
-      padding-top: .1rem;
-    }
-
-    .bug-desc { color: var(--text); line-height: 1.5; }
-    .bug-file { color: var(--muted); font-size: .75rem; font-family: monospace; }
+    .comments-placeholder a { color: var(--gold); }
+    .comments-placeholder a:hover { color: var(--accent); }
   </style>
 </head>
 <body>
@@ -118,13 +132,35 @@
       <div id="ruffle-player"></div>
     </div>
 
-    <!-- PATCH LOG -->
-    <div class="patch-section">
-      <h2>Patch log — 43 bugs fixed</h2>
-      <ul class="bug-list" id="bug-list">
-        <!-- filled by inline script below -->
-      </ul>
-    </div>
+    <!-- RATING -->
+    <section class="rating-section">
+      <h2>Rate this game</h2>
+      <div class="rating-row">
+        <div class="stars" id="rating-stars" role="radiogroup" aria-label="Rate this game">
+          <button type="button" class="star" data-value="1" aria-label="1 star">★</button>
+          <button type="button" class="star" data-value="2" aria-label="2 stars">★</button>
+          <button type="button" class="star" data-value="3" aria-label="3 stars">★</button>
+          <button type="button" class="star" data-value="4" aria-label="4 stars">★</button>
+          <button type="button" class="star" data-value="5" aria-label="5 stars">★</button>
+        </div>
+        <div class="rating-info">
+          <span id="rating-your" class="rating-your">Click a star to rate</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMENTS -->
+    <section class="comments-section">
+      <h2>Comments</h2>
+      <div id="giscus-container">
+        <!-- Giscus will inject here. Until configured, show placeholder. -->
+        <p class="comments-placeholder">
+          Comments are powered by GitHub Discussions via
+          <a href="https://giscus.app" target="_blank">Giscus</a>.
+          (Pending repo Discussions setup.)
+        </p>
+      </div>
+    </section>
 
   </main>
 
@@ -137,7 +173,6 @@
     // ── Ruffle player ──
     window.RufflePlayer = window.RufflePlayer || {};
     window.RufflePlayer.config = {
-      logLevel: "verbose",
       warnOnUnsupportedContent: true,
     };
     window.addEventListener('load', () => {
@@ -150,80 +185,41 @@
       player.load('game.swf');
     });
 
-    // ── Bug list — 42 broken state machine transitions patched ──
-    const bugs = [
-      // DoAction_53 — Pig Face Room
-      { n:1,  desc:'Pig Face room: message node "MSJ1" had placeholder text "XXXXXXXXXXXX" instead of actual dialogue string — game froze on trigger.', file:'frame_7/DoAction_53.as:11' },
-      // DoAction_61 — Bob\'s Bedroom
-      { n:2,  desc:'Bob\'s Bedroom: condition HAVE@TERMINAR_DIALOGO pointed to broken state "XXX" — dialogue end transition never resolved.', file:'frame_7/DoAction_61.as:47' },
-      { n:3,  desc:'Bob\'s Bedroom: condition HAVE@COFRE_ABIERTO_BOB pointed to broken state "XXXX" — chest-open state never triggered downstream logic.', file:'frame_7/DoAction_61.as:567' },
-      // DoAction_64 — Bob\'s Bathroom
-      { n:4,  desc:'Bob\'s Bathroom: default fallback transition (@|%48) pointed to broken state "XXX" — room state machine stuck on unresolved branch.', file:'frame_7/DoAction_64.as:171' },
-      // DoAction_65 — Living Room
-      { n:5,  desc:'Living Room: condition HAVE@GANCHO_VISIBLE (first check) pointed to broken state "XXX" — hook visibility flag never resolved.', file:'frame_7/DoAction_65.as:112' },
-      { n:6,  desc:'Living Room: condition HAVE@GANCHO_VISIBLE (second check) pointed to broken state "XXX" — duplicate broken branch for hook visibility.', file:'frame_7/DoAction_65.as:124' },
-      { n:7,  desc:'Living Room: default fallback transition (@|%48) pointed to broken state "XXXX" — room progression permanently blocked.', file:'frame_7/DoAction_65.as:162' },
-      // DoAction_68 — Patrick\'s House Facade
-      { n:8,  desc:'Patrick\'s Facade: condition HAVE@ENTRO_CASA_PATRICIO pointed to broken state "XXX" — entering Patrick\'s house never triggered correct state.', file:'frame_7/DoAction_68.as:71' },
-      // DoAction_70 — Squidward\'s Facade
-      { n:9,  desc:'Squidward\'s Facade: condition HAVE@USO_LLAVE pointed to broken state "XXXX" — wrench-used flag had no valid next state.', file:'frame_7/DoAction_70.as:51' },
-      { n:10, desc:'Squidward\'s Facade: condition IN_SCENE@CUARTO_BICICLETA pointed to broken state "XXX" — bicycle scene check unresolved.', file:'frame_7/DoAction_70.as:54' },
-      { n:11, desc:'Squidward\'s Facade: condition HAVE@PUSO_LLAVE pointed to broken state "XXXX" — wrench-placed flag had no valid next state.', file:'frame_7/DoAction_70.as:57' },
-      { n:12, desc:'Squidward\'s Facade: condition IN_SCENE@CUARTO_BICICLETA (second check) pointed to broken state "XXXX" — duplicate broken scene check.', file:'frame_7/DoAction_70.as:67' },
-      { n:13, desc:'Squidward\'s Facade: default fallback transition (@|%48) pointed to broken state "XXXXX" — entire fallback path broken.', file:'frame_7/DoAction_70.as:71' },
-      { n:14, desc:'Squidward\'s Facade: condition HAVE@ABRIO_PUERTA pointed to broken state "XXXXX" — door-opened flag never advanced game state.', file:'frame_7/DoAction_70.as:83' },
-      // DoAction_72 — Squidward\'s Storage Room
-      { n:15, desc:'Squidward\'s Storage: condition HAVE@USO_LLAVE pointed to broken state "XXXX" — wrench interaction in storage room broken.', file:'frame_7/DoAction_72.as:114' },
-      { n:16, desc:'Squidward\'s Storage: condition HAVE@PUSO_LLAVE pointed to broken state "XXXX" — wrench-placed state in storage room broken.', file:'frame_7/DoAction_72.as:121' },
-      { n:17, desc:'Squidward\'s Storage: default fallback transition (@|%48) for propeller sequence pointed to broken state "XXXXX".', file:'frame_7/DoAction_72.as:143' },
-      // DoAction_74 — Bicycle Room
-      { n:18, desc:'Bicycle Room: condition HAVE@USO_LLAVE pointed to broken state "XXXX" — using the wrench on bicycle had no valid next state.', file:'frame_7/DoAction_74.as:114' },
-      // DoAction_76 — Mr. Krabs\' Office
-      { n:19, desc:'Mr. Krabs\' Office: default fallback transition (@|%48) pointed to broken state "XXX" — room progression blocked.', file:'frame_7/DoAction_76.as:247' },
-      // DoAction_79 — Fan Room
-      { n:20, desc:'Fan Room: condition HAVE@TIENE_HELICE pointed to broken state "XXX" — having the propeller never unlocked the fan puzzle.', file:'frame_7/DoAction_79.as:77' },
-      // DoAction_85 — Vicky Room
-      { n:21, desc:'Vicky Room: condition HAVE@LLEGO_LUZ pointed to broken state "XXXX" — light-arrived flag never advanced Vicky\'s room logic.', file:'frame_7/DoAction_85.as:49' },
-      { n:22, desc:'Vicky Room: condition HAVE@CARGO_BATERIA pointed to broken state "XXXX" — battery-charged flag had no valid next state.', file:'frame_7/DoAction_85.as:119' },
-      // DoAction_95 — Pulley Room
-      { n:23, desc:'Pulley Room: condition HAVE@ESTA_ANIMANDO_ENGRANAJES (check 1) pointed to broken state "XXX" — gear animation flag broken.', file:'frame_7/DoAction_95.as:55' },
-      { n:24, desc:'Pulley Room: condition HAVE@ESTA_ANIMANDO_ENGRANAJES (check 2) pointed to broken state "XXX" — second gear animation check also broken.', file:'frame_7/DoAction_95.as:115' },
-      { n:25, desc:'Pulley Room: condition HAVE@GANA_ENGRANAJE_GRANDE_INV (check 1) pointed to broken state "XXX" — large gear pickup never registered.', file:'frame_7/DoAction_95.as:156' },
-      { n:26, desc:'Pulley Room: condition HAVE@ESTA_ANIMANDO_ENGRANAJES (check 3) pointed to broken state "XXX" — third broken gear animation branch.', file:'frame_7/DoAction_95.as:182' },
-      { n:27, desc:'Pulley Room: condition HAVE@GANA_ENGRANAJE_GRANDE_INV (check 2) pointed to broken state "XXX" — duplicate broken large gear pickup check.', file:'frame_7/DoAction_95.as:202' },
-      // DoAction_104 — Diamond Room
-      { n:28, desc:'Diamond Room: condition HAVE@GANO_GEMAS_DIAMANTE pointed to broken state "XXXX" — collecting all diamond gems had no valid next state.', file:'frame_7/DoAction_104.as:68' },
-      // DoAction_105 — Gem Box Room (9 bugs)
-      { n:29, desc:'Gem Box Room: fallback transition (@|%48) on gem slot 1 pointed to broken state "XXX" — slot 1 unresolved branch.', file:'frame_7/DoAction_105.as:62' },
-      { n:30, desc:'Gem Box Room: fallback transition (@|%48) on gem slot 2 pointed to broken state "XXXX" — slot 2 unresolved branch.', file:'frame_7/DoAction_105.as:65' },
-      { n:31, desc:'Gem Box Room: fallback transition (@|%48) on gem slot 3 pointed to broken state "XXXX" — slot 3 unresolved branch.', file:'frame_7/DoAction_105.as:68' },
-      { n:32, desc:'Gem Box Room: fallback transition (@|%48) on gem slot 4 pointed to broken state "XXXX" — slot 4 unresolved branch.', file:'frame_7/DoAction_105.as:71' },
-      { n:33, desc:'Gem Box Room: fallback transition (@|%48) on gem slot 5 pointed to broken state "XXXX" — slot 5 unresolved branch.', file:'frame_7/DoAction_105.as:74' },
-      { n:34, desc:'Gem Box Room: fallback transition (@|%48) on gem slot 6 pointed to broken state "XXX" — slot 6 unresolved branch.', file:'frame_7/DoAction_105.as:88' },
-      { n:35, desc:'Gem Box Room: fallback transition (@|%48) on gem slot 7 pointed to broken state "XXX" — slot 7 unresolved branch.', file:'frame_7/DoAction_105.as:104' },
-      { n:36, desc:'Gem Box Room: fallback transition (@|%48) on gem slot 8 pointed to broken state "XXX" — slot 8 unresolved branch.', file:'frame_7/DoAction_105.as:120' },
-      { n:37, desc:'Gem Box Room: fallback transition (@|%48) on gem slot 9 pointed to broken state "XXX" — slot 9 unresolved branch.', file:'frame_7/DoAction_105.as:136' },
-      // DoAction_108 — Dark Room 2 (block puzzle)
-      { n:38, desc:'Dark Room 2: condition HAVE@BLOQUE_1_PRESIONADO pointed to broken state "XXX" — block 1 press never advanced the block puzzle.', file:'frame_7/DoAction_108.as:59' },
-      { n:39, desc:'Dark Room 2: condition HAVE@BLOQUE_2_PRESIONADO pointed to broken state "XXX" — block 2 press never advanced the block puzzle.', file:'frame_7/DoAction_108.as:76' },
-      { n:40, desc:'Dark Room 2: condition HAVE@BLOQUE_3_PRESIONADO pointed to broken state "XXX" — block 3 press never advanced the block puzzle.', file:'frame_7/DoAction_108.as:93' },
-      { n:41, desc:'Dark Room 2: condition HAVE@BLOQUE_4_PRESIONADO pointed to broken state "XXX" — block 4 press never advanced the block puzzle.', file:'frame_7/DoAction_108.as:110' },
-      // DoAction_109 — Thug 1 Room
-      { n:42, desc:'Thug 1 Room: default fallback transition (@|%48) pointed to broken state "XXXX" — room state machine permanently stuck.', file:'frame_7/DoAction_109.as:152' },
-      // frame_1 DoAction — Inkagames terrain walkability (Ruffle compatibility)
-      { n:43, desc:'Walkability terrain array (xyz1374): Ruffle executes frame scripts before MovieClip shapes finish placement, so the terrain grid is built when mcWalkRange is not in its final position. Rooms with complex layouts (Krusty Krab kitchen-side, Squidward\'s storage, Flying Dutchman\'s quarters, Mr. Krabs\' office, fish-tank room) end up with mostly-empty arrays — the character cannot walk to any clicked point and clickable objects cannot be reached. Patched in frame_1 DoAction with two hooks: (1) xyz163 override that auto-corrects each cell on demand via live mcWalkRange.hitTest, and (2) automatic full rebuild of xyz1374 5 frames after every scene change. Affects all Inkagames built on this engine.', file:'frame_1/DoAction' },
-    ];
+    // ── Rating (per-user, stored in localStorage) ──
+    (function initRating(){
+      const gameId = 'spongebob-saw-game';
+      const key = 'seikios:rating:' + gameId;
+      const stars = document.querySelectorAll('#rating-stars .star');
+      const info  = document.getElementById('rating-your');
 
-    const list = document.getElementById('bug-list');
-    list.innerHTML = bugs.map(b => `
-      <li class="bug-item">
-        <span class="bug-n">#${String(b.n).padStart(2,'0')}</span>
-        <div>
-          <div class="bug-desc">${b.desc}</div>
-          ${b.file ? `<div class="bug-file">${b.file}</div>` : ''}
-        </div>
-      </li>
-    `).join('');
+      function paint(value, asHover) {
+        stars.forEach(s => {
+          const v = parseInt(s.dataset.value, 10);
+          s.classList.toggle('active', v <= value);
+          s.classList.toggle('hovering', asHover && v <= value);
+        });
+      }
+      function setLabel(value) {
+        if (value > 0) info.textContent = 'Your rating: ' + value + ' / 5';
+        else info.textContent = 'Click a star to rate';
+      }
+
+      let current = parseInt(localStorage.getItem(key) || '0', 10);
+      paint(current, false);
+      setLabel(current);
+
+      stars.forEach(s => {
+        s.addEventListener('mouseenter', () => paint(parseInt(s.dataset.value, 10), true));
+        s.addEventListener('mouseleave', () => paint(current, false));
+        s.addEventListener('click', () => {
+          current = parseInt(s.dataset.value, 10);
+          localStorage.setItem(key, String(current));
+          paint(current, false);
+          setLabel(current);
+        });
+      });
+    })();
+
   </script>
 
 </body>
