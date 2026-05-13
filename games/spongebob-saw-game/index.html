@@ -85,18 +85,12 @@
       font-size: .85rem;
     }
 
-    /* ── Comments ── */
-    .comments-placeholder {
-      background: var(--surface);
-      border: 1px dashed #2a0606;
-      border-radius: var(--radius);
-      padding: 1rem 1.25rem;
-      color: var(--muted);
-      font-size: .875rem;
-      line-height: 1.5;
+    /* ── Comments (Giscus) ── */
+    .giscus, .giscus-frame {
+      width: 100%;
+      min-height: 150px;
     }
-    .comments-placeholder a { color: var(--gold); }
-    .comments-placeholder a:hover { color: var(--accent); }
+    .giscus-frame { border: 0; color-scheme: dark; }
   </style>
 </head>
 <body>
@@ -149,17 +143,24 @@
       </div>
     </section>
 
-    <!-- COMMENTS -->
+    <!-- COMMENTS — powered by Giscus (GitHub Discussions) -->
     <section class="comments-section">
       <h2>Comments</h2>
-      <div id="giscus-container">
-        <!-- Giscus will inject here. Until configured, show placeholder. -->
-        <p class="comments-placeholder">
-          Comments are powered by GitHub Discussions via
-          <a href="https://giscus.app" target="_blank">Giscus</a>.
-          (Pending repo Discussions setup.)
-        </p>
-      </div>
+      <script src="https://giscus.app/client.js"
+              data-repo="DarkarChong/SeikiOS_FlashPage"
+              data-repo-id="R_kgDOSPRhJg"
+              data-category="General"
+              data-category-id="DIC_kwDOSPRhJs4C867t"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="bottom"
+              data-theme="dark"
+              data-lang="en"
+              crossorigin="anonymous"
+              async>
+      </script>
     </section>
 
   </main>
