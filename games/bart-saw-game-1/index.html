@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bart Simpson Saw Game — SEIKIOS</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo.svg">
+  <script src="../../ruffle/ruffle.js"></script>
+  <style>
+    .game-layout { max-width: 900px; margin: 0 auto; padding: 2rem; }
+
+    .breadcrumb {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .breadcrumb a { color: var(--accent); }
+    .breadcrumb a:hover { color: var(--gold); }
+
+    .game-title {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 900;
+      margin-bottom: .5rem;
+    }
+
+    .game-meta {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .player-wrap {
+      background: #000;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 2rem;
+      aspect-ratio: 4/3;
+      max-height: 540px;
+    }
+
+    #ruffle-player {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── Section headings (shared) ── */
+    .rating-section, .comments-section { margin-top: 2.5rem; }
+    .rating-section h2, .comments-section h2 {
+      font-size: 1rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    /* ── Star rating ── */
+    .rating-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      background: var(--surface);
+      border: 1px solid #2a0606;
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+    }
+    .stars { display: inline-flex; gap: .25rem; }
+    .star {
+      background: none;
+      border: none;
+      padding: 0 .15rem;
+      cursor: pointer;
+      font-size: 1.9rem;
+      line-height: 1;
+      color: #3a1a1a;
+      transition: color .15s ease, transform .1s ease;
+    }
+    .star:hover { transform: scale(1.15); }
+    .star.active   { color: var(--gold); }
+    .star.hovering { color: var(--gold); opacity: .8; }
+    .rating-your {
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    /* ── Comments (Giscus) ── */
+    .giscus, .giscus-frame {
+      width: 100%;
+      min-height: 150px;
+    }
+    .giscus-frame { border: 0; color-scheme: dark; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img class="logo-icon" src="../../assets/logo.svg" alt="">
+      SEIKIOS
+    </div>
+    <nav>
+      <a href="../../#catalog">Games</a>
+      <a href="../../#about">About</a>
+      <a href="https://github.com/DarkarChong/SeikiOS_FlashPage" target="_blank">GitHub</a>
+    </nav>
+  </header>
+
+  <main class="game-layout">
+
+    <div class="breadcrumb">
+      <a href="../../">SEIKIOS</a> › Bart Simpson Saw Game
+    </div>
+
+    <h1 class="game-title">Bart Simpson Saw Game</h1>
+
+    <div class="game-meta">
+      <span class="badge badge-patched">✓ Patched</span>
+      <span class="badge badge-bugs">1 bug fixed</span>
+      <span class="badge" style="background:#1a1010; color:var(--muted);">2010 · Point & Click</span>
+    </div>
+
+    <!-- RUFFLE PLAYER -->
+    <div class="player-wrap">
+      <div id="ruffle-player"></div>
+    </div>
+
+    <!-- RATING -->
+    <section class="rating-section">
+      <h2>Rate this game</h2>
+      <div class="rating-row">
+        <div class="stars" id="rating-stars" role="radiogroup" aria-label="Rate this game">
+          <button type="button" class="star" data-value="1" aria-label="1 star">★</button>
+          <button type="button" class="star" data-value="2" aria-label="2 stars">★</button>
+          <button type="button" class="star" data-value="3" aria-label="3 stars">★</button>
+          <button type="button" class="star" data-value="4" aria-label="4 stars">★</button>
+          <button type="button" class="star" data-value="5" aria-label="5 stars">★</button>
+        </div>
+        <div class="rating-info">
+          <span id="rating-your" class="rating-your">Click a star to rate</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMENTS — powered by Giscus (GitHub Discussions) -->
+    <section class="comments-section">
+      <h2>Comments</h2>
+      <script src="https://giscus.app/client.js"
+              data-repo="DarkarChong/SeikiOS_FlashPage"
+              data-repo-id="R_kgDOSPRhJg"
+              data-category="General"
+              data-category-id="DIC_kwDOSPRhJs4C867t"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="bottom"
+              data-theme="dark"
+              data-lang="en"
+              crossorigin="anonymous"
+              async>
+      </script>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>SEIKIOS — Flash Game Preservation Project</p>
+    <p>Non-profit · All rights belong to original creators · Powered by <a href="https://ruffle.rs" target="_blank">Ruffle</a></p>
+  </footer>
+
+  <script>
+    // ── Ruffle player ──
+    window.RufflePlayer = window.RufflePlayer || {};
+    window.RufflePlayer.config = {
+      warnOnUnsupportedContent: true,
+    };
+    window.addEventListener('load', () => {
+      const ruffle = window.RufflePlayer.newest();
+      const player = ruffle.createPlayer();
+      const container = document.getElementById('ruffle-player');
+      container.appendChild(player);
+      player.style.width  = '100%';
+      player.style.height = '100%';
+      player.load('game.swf');
+    });
+
+    // ── Rating (per-user, stored in localStorage) ──
+    (function initRating(){
+      const gameId = 'bart-saw-game-1';
+      const key = 'seikios:rating:' + gameId;
+      const stars = document.querySelectorAll('#rating-stars .star');
+      const info  = document.getElementById('rating-your');
+
+      function paint(value, asHover) {
+        stars.forEach(s => {
+          const v = parseInt(s.dataset.value, 10);
+          s.classList.toggle('active', v <= value);
+          s.classList.toggle('hovering', asHover && v <= value);
+        });
+      }
+      function setLabel(value) {
+        if (value > 0) info.textContent = 'Your rating: ' + value + ' / 5';
+        else info.textContent = 'Click a star to rate';
+      }
+
+      let current = parseInt(localStorage.getItem(key) || '0', 10);
+      paint(current, false);
+      setLabel(current);
+
+      stars.forEach(s => {
+        s.addEventListener('mouseenter', () => paint(parseInt(s.dataset.value, 10), true));
+        s.addEventListener('mouseleave', () => paint(current, false));
+        s.addEventListener('click', () => {
+          current = parseInt(s.dataset.value, 10);
+          localStorage.setItem(key, String(current));
+          paint(current, false);
+          setLabel(current);
+        });
+      });
+    })();
+
+  </script>
+
+</body>
+</html>
