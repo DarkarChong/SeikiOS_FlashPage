@@ -187,7 +187,6 @@ nav a:hover { opacity: 1; color: var(--gold); }
 }
 
 .badge-patched { background: #1a4a1a; color: #5dbb5d; }
-.badge-bugs    { background: #2a1a00; color: var(--gold); }
 .badge-wip     { background: #1a1a2a; color: #7080cc; }
 
 /* ── FOOTER ── */

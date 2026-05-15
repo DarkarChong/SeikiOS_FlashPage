@@ -3,14 +3,12 @@
     "id": "spongebob-saw-game",
     "title": "Spongebob Saw Game",
     "thumbnail": "games/spongebob-saw-game/thumbnail.png",
-    "status": "patched",
-    "bugs_fixed": 43
+    "status": "patched"
   },
   {
     "id": "bart-saw-game-1",
     "title": "Bart Simpson Saw Game",
     "thumbnail": "games/bart-saw-game-1/thumbnail.png",
-    "status": "patched",
-    "bugs_fixed": 1
+    "status": "patched"
   }
 ]

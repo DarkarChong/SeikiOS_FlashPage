@@ -5,10 +5,8 @@ async function loadCatalog() {
 
   const grid = document.getElementById('game-grid');
   const counter = document.getElementById('stat-games');
-  const bugCounter = document.getElementById('stat-bugs');
 
   counter.textContent = games.length;
-  bugCounter.textContent = games.reduce((s, g) => s + (g.bugs_fixed || 0), 0);
 
   grid.innerHTML = games.map(g => `
     <a class="card" href="games/${g.id}/">
@@ -21,9 +19,6 @@ async function loadCatalog() {
           ${g.status === 'patched'
             ? `<span class="badge badge-patched">✓ Patched</span>`
             : `<span class="badge badge-wip">WIP</span>`}
-          ${g.bugs_fixed
-            ? `<span class="badge badge-bugs">${g.bugs_fixed} bugs</span>`
-            : ''}
         </div>
       </div>
     </a>
