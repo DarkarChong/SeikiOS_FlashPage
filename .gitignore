@@ -12,6 +12,7 @@ node_modules/
 # Obsidian
 .obsidian/
 _memoria-*.md
+plan.md
 
 # SWF backups (local-only, made by JPEXS workflow)
 *.backup_predebug
