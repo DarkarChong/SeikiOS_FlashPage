@@ -3,8 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SEIKIOS — Restoring Your Gaming Memories</title>
-  <meta name="description" content="Non-profit Flash game preservation. Patched SWF games running directly in your browser via Ruffle.">
+
+  <!-- ── Primary SEO ── -->
+  <title>SEIKIOS — Flash Game Preservation · Play Classic Flash Games in Your Browser</title>
+  <meta name="description" content="Non-profit Flash game preservation project. Play patched classic Flash games like SpongeBob Saw Game and Bart Simpson Saw Game directly in your browser — no Flash plugin required, powered by Ruffle.">
+  <meta name="keywords" content="flash games, ruffle, flash preservation, play flash in browser, inkagames, spongebob saw game, bart simpson saw game, html5 flash, flash games online, juegos flash navegador">
+  <meta name="author" content="DarkarChong">
+  <link rel="canonical" href="https://darkarchong.github.io/SeikiOS_FlashPage/">
+
+  <!-- ── Open Graph (Facebook, WhatsApp, Discord, LinkedIn) ── -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SEIKIOS">
+  <meta property="og:title" content="SEIKIOS — Play Classic Flash Games in Your Browser">
+  <meta property="og:description" content="Non-profit Flash game preservation. Patched classic Flash games playable in any modern browser — no Flash plugin needed.">
+  <meta property="og:url" content="https://darkarchong.github.io/SeikiOS_FlashPage/">
+  <meta property="og:image" content="https://darkarchong.github.io/SeikiOS_FlashPage/assets/logo.svg">
+  <meta property="og:locale" content="en_US">
+
+  <!-- ── Twitter / X Cards ── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SEIKIOS — Flash Game Preservation">
+  <meta name="twitter:description" content="Play patched classic Flash games in your browser. Non-profit preservation project powered by Ruffle.">
+  <meta name="twitter:image" content="https://darkarchong.github.io/SeikiOS_FlashPage/assets/logo.svg">
+
+  <!-- ── Schema.org structured data (rich results in Google) ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "SEIKIOS",
+    "alternateName": "SEIKIOS Flash Game Preservation",
+    "url": "https://darkarchong.github.io/SeikiOS_FlashPage/",
+    "description": "Non-profit Flash game preservation project. Play patched classic Flash games directly in your browser.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "SEIKIOS",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://darkarchong.github.io/SeikiOS_FlashPage/assets/logo.svg"
+      }
+    }
+  }
+  </script>
+
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   <!-- Ruffle Flash emulator (local fork with SEIKIOS-specific fixes) -->
@@ -63,9 +104,22 @@
       SEIKIOS is a non-profit Flash game preservation project. We manually decompile broken SWF files
       using <strong style="color:var(--text)">JPEXS Free Flash Decompiler</strong>, patch the broken
       AS2 code, and publish the playable versions running via <strong style="color:var(--text)">Ruffle</strong> — an
-      open-source Flash emulator.<br><br>
-      All rights belong to their original creators. If you are a rights holder and want a game removed,
-      please open a GitHub issue.
+      open-source Flash emulator. No Flash plugin, no installation, no tracking.
+    </p>
+  </section>
+
+  <!-- ── DMCA / RIGHTS ── -->
+  <section class="catalog-section" id="rights">
+    <div class="section-title">Rights &amp; Takedowns</div>
+    <p style="color:var(--muted); line-height:1.8; max-width:640px; font-size:.95rem;">
+      All games hosted on SEIKIOS belong to their original creators. We host patched versions
+      solely for cultural preservation, non-commercially, and only games that we believe are
+      effectively abandoned by their original distributors.<br><br>
+      <strong style="color:var(--text)">If you are a rights holder and want a game removed,</strong>
+      email <a href="mailto:chong.seikin@gmail.com" style="color:var(--gold);">chong.seikin@gmail.com</a>
+      with the game's URL and proof of ownership. We comply with valid takedown requests within
+      48 hours. You may also open an issue on
+      <a href="https://github.com/DarkarChong/SeikiOS_FlashPage/issues" target="_blank" style="color:var(--gold);">our GitHub repository</a>.
     </p>
   </section>
 
