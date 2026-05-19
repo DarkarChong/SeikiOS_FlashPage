@@ -1,8 +1,8 @@
-# SEIKIOS — Flash Game Preservation
-# https://darkarchong.github.io/SeikiOS_FlashPage/
+﻿# SEIKIOS — Flash Game Preservation
+# https://seikios.com/
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://darkarchong.github.io/SeikiOS_FlashPage/sitemap.xml
+Sitemap: https://seikios.com/sitemap.xml
