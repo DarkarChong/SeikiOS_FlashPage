@@ -10,5 +10,11 @@
     "title": "Bart Simpson Saw Game",
     "thumbnail": "games/bart-saw-game-1/thumbnail.png",
     "status": "patched"
+  },
+  {
+    "id": "lisa-saw-game",
+    "title": "Lisa Simpson Saw Game",
+    "thumbnail": "games/lisa-saw-game/thumbnail.png",
+    "status": "patched"
   }
 ]

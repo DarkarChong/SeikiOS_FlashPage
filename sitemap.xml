@@ -40,4 +40,17 @@
     </image:image>
   </url>
 
+  <!-- Lisa Simpson Saw Game -->
+  <url>
+    <loc>https://seikios.com/games/lisa-saw-game/</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://seikios.com/games/lisa-saw-game/thumbnail.png</image:loc>
+      <image:title>Lisa Simpson Saw Game</image:title>
+      <image:caption>Play Lisa Simpson Saw Game free online — patched Flash game playable in your browser</image:caption>
+    </image:image>
+  </url>
+
 </urlset>
