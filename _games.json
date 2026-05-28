@@ -16,5 +16,17 @@
     "title": "Lisa Simpson Saw Game",
     "thumbnail": "games/lisa-saw-game/thumbnail.png",
     "status": "patched"
+  },
+  {
+    "id": "homer-saw-game",
+    "title": "Homer Simpson Saw Game",
+    "thumbnail": "games/homer-saw-game/thumbnail.png",
+    "status": "patched"
+  },
+  {
+    "id": "marge-saw-game",
+    "title": "Marge Simpson Saw Game",
+    "thumbnail": "games/marge-saw-game/thumbnail.png",
+    "status": "patched"
   }
 ]

@@ -53,4 +53,32 @@
     </image:image>
   </url>
 
+
+  <!-- Homer Simpson Saw Game -->
+  <url>
+    <loc>https://seikios.com/games/homer-saw-game/</loc>
+    <lastmod>2026-05-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://seikios.com/games/homer-saw-game/thumbnail.png</image:loc>
+      <image:title>Homer Simpson Saw Game</image:title>
+      <image:caption>Play Homer Simpson Saw Game free online &mdash; patched Flash game playable in your browser</image:caption>
+    </image:image>
+  </url>
+
+
+  <!-- Marge Simpson Saw Game -->
+  <url>
+    <loc>https://seikios.com/games/marge-saw-game/</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://seikios.com/games/marge-saw-game/thumbnail.png</image:loc>
+      <image:title>Marge Simpson Saw Game</image:title>
+      <image:caption>Play Marge Simpson Saw Game free online &mdash; patched Flash game playable in your browser</image:caption>
+    </image:image>
+  </url>
+
 </urlset>
