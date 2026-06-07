@@ -61,6 +61,15 @@ img { display: block; }
   transform: rotate(var(--r, 0deg));
   box-shadow: 0 2px 8px rgba(0,0,0,.45);
 }
+/* character mode: transparent cutouts float without a frame, taller than wide */
+.bg-belt.is-chars { opacity: .26; }
+.bg-belt.is-chars img {
+  width: auto;
+  height: 168px;
+  object-fit: contain;
+  border-radius: 0;
+  box-shadow: none;
+}
 /* duplicated tiles → translate by one full set for a seamless rightward loop */
 @keyframes belt {
   from { transform: translateX(-50%); }

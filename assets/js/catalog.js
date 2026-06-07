@@ -8,25 +8,45 @@ const FILTER_LABELS = {
 
 const state = { filter: 'all', query: '', order: 'name' };
 let GAMES = [];
+let BASE = '';
 
 async function loadCatalog() {
-  const base = document.querySelector('base')?.href || location.href.replace(/\/[^/]*$/, '/');
-  const res = await fetch(base + '_games.json');
+  BASE = document.querySelector('base')?.href || location.href.replace(/\/[^/]*$/, '/');
+  const res = await fetch(BASE + '_games.json');
   GAMES = await res.json();
 
-  buildBelt(GAMES);
+  await buildBelt();
   wireControls();
   render();
 }
 
-// ── Background conveyor belt: rows of thumbnails sliding left→right, in
-//    random order, each tile tilted like a brick. Tiles are duplicated per
-//    row so the CSS translateX(-50% → 0) loop is seamless. ──
-function buildBelt(games) {
+// ── Background conveyor belt: rows of images sliding left→right, in random
+//    order, each tile tilted like a brick. Tiles are duplicated per row so
+//    the CSS translateX(-50% → 0) loop is seamless.
+//    Source = transparent character cutouts from assets/chars/_chars.json;
+//    falls back to game thumbnails while no characters are registered. ──
+async function buildBelt() {
   const el = document.getElementById('bg-belt');
   if (!el) return;
-  const thumbs = games.map(g => g.thumbnail).filter(Boolean);
-  if (!thumbs.length) return;
+
+  let imgs = [];
+  let usingChars = false;
+  try {
+    const r = await fetch(BASE + 'assets/chars/_chars.json');
+    if (r.ok) {
+      const names = await r.json();
+      if (Array.isArray(names) && names.length) {
+        imgs = names.map(n => 'assets/chars/' + n);
+        usingChars = true;
+      }
+    }
+  } catch (_) { /* no manifest yet → fall back below */ }
+
+  if (!imgs.length) imgs = GAMES.map(g => g.thumbnail).filter(Boolean);
+  if (!imgs.length) return;
+
+  el.classList.toggle('is-chars', usingChars);
+  const thumbs = imgs;
 
   const shuffle = arr => {
     const a = arr.slice();
