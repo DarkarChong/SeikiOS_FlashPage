@@ -14,22 +14,48 @@ async function loadCatalog() {
   const res = await fetch(base + '_games.json');
   GAMES = await res.json();
 
-  buildCollage(GAMES);
+  buildBelt(GAMES);
   wireControls();
   render();
 }
 
-// ── Background character collage (repeat thumbnails to fill the gutters) ──
-function buildCollage(games) {
-  const el = document.getElementById('bg-collage');
+// ── Background conveyor belt: rows of thumbnails sliding left→right, in
+//    random order, each tile tilted like a brick. Tiles are duplicated per
+//    row so the CSS translateX(-50% → 0) loop is seamless. ──
+function buildBelt(games) {
+  const el = document.getElementById('bg-belt');
   if (!el) return;
   const thumbs = games.map(g => g.thumbnail).filter(Boolean);
   if (!thumbs.length) return;
-  const TILES = 60;
-  el.innerHTML = Array.from({ length: TILES }, (_, i) => {
-    const src = thumbs[i % thumbs.length];
-    return `<img src="${src}" alt="" loading="lazy" aria-hidden="true">`;
-  }).join('');
+
+  const shuffle = arr => {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  };
+
+  const rows = Math.ceil(window.innerHeight / 130) + 1;
+  const perRow = 14; // tiles per half before duplication
+
+  let html = '';
+  for (let r = 0; r < rows; r++) {
+    let seq = [];
+    while (seq.length < perRow) seq = seq.concat(shuffle(thumbs));
+    seq = seq.slice(0, perRow);
+
+    const tiles = seq.concat(seq).map(src => {
+      const rot = (Math.random() * 14 - 7).toFixed(1); // -7°..+7° brick tilt
+      return `<img src="${src}" alt="" aria-hidden="true" style="--r:${rot}deg">`;
+    }).join('');
+
+    const dur = (48 + Math.random() * 42).toFixed(1);   // 48–90s, varied speed
+    const offset = Math.floor(Math.random() * 130);     // brick stagger per row
+    html += `<div class="belt-row" style="animation-duration:${dur}s;margin-left:-${offset}px">${tiles}</div>`;
+  }
+  el.innerHTML = html;
 }
 
 // ── Controls ──
