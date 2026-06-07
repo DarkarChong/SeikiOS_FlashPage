@@ -3,30 +3,40 @@
     "id": "spongebob-saw-game",
     "title": "Spongebob Saw Game",
     "thumbnail": "games/spongebob-saw-game/thumbnail.png",
-    "status": "patched"
+    "status": "patched",
+    "category": "inkagames",
+    "year": 2009
   },
   {
     "id": "bart-saw-game-1",
     "title": "Bart Simpson Saw Game",
     "thumbnail": "games/bart-saw-game-1/thumbnail.png",
-    "status": "patched"
+    "status": "patched",
+    "category": "inkagames",
+    "year": 2010
   },
   {
     "id": "lisa-saw-game",
     "title": "Lisa Simpson Saw Game",
     "thumbnail": "games/lisa-saw-game/thumbnail.png",
-    "status": "patched"
+    "status": "patched",
+    "category": "inkagames",
+    "year": 2010
   },
   {
     "id": "homer-saw-game",
     "title": "Homer Simpson Saw Game",
     "thumbnail": "games/homer-saw-game/thumbnail.png",
-    "status": "patched"
+    "status": "patched",
+    "category": "inkagames",
+    "year": 2010
   },
   {
     "id": "marge-saw-game",
     "title": "Marge Simpson Saw Game",
     "thumbnail": "games/marge-saw-game/thumbnail.png",
-    "status": "patched"
+    "status": "patched",
+    "category": "inkagames",
+    "year": 2010
   }
 ]
