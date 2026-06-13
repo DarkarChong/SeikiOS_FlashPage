@@ -28,68 +28,6 @@ a { color: inherit; text-decoration: none; }
 img { display: block; }
 
 /* ════════════════════════════════════════════════════════════
-   BACKGROUND CONVEYOR BELT  (rows of game thumbnails sliding
-   left→right, tilted like bricks, dimmed behind the content)
-   ════════════════════════════════════════════════════════════ */
-.bg-belt {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 18px;
-  overflow: hidden;
-  opacity: .18;
-  pointer-events: none;
-}
-.belt-row {
-  display: flex;
-  gap: 16px;
-  width: max-content;
-  animation-name: belt;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  will-change: transform;
-}
-.bg-belt img {
-  width: 150px;
-  height: 112px;
-  flex: none;
-  object-fit: cover;
-  border-radius: 6px;
-  transform: rotate(var(--r, 0deg));
-  box-shadow: 0 2px 8px rgba(0,0,0,.45);
-}
-/* character mode: transparent cutouts float without a frame, taller than wide */
-.bg-belt.is-chars { opacity: .26; }
-.bg-belt.is-chars img {
-  width: auto;
-  height: 168px;
-  object-fit: contain;
-  border-radius: 0;
-  box-shadow: none;
-}
-/* duplicated tiles → translate by one full set for a seamless rightward loop */
-@keyframes belt {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
-}
-/* solid dark wash so the belt reads as atmosphere, never noise */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: var(--bg);
-  opacity: .3;
-  pointer-events: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .belt-row { animation: none; }
-}
-
-/* ════════════════════════════════════════════════════════════
    APP LAYOUT
    ════════════════════════════════════════════════════════════ */
 .app { display: flex; min-height: 100vh; }

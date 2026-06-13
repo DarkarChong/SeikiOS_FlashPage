@@ -15,67 +15,8 @@ async function loadCatalog() {
   const res = await fetch(BASE + '_games.json');
   GAMES = await res.json();
 
-  await buildBelt();
   wireControls();
   render();
-}
-
-// ── Background conveyor belt: rows of images sliding left→right, in random
-//    order, each tile tilted like a brick. Tiles are duplicated per row so
-//    the CSS translateX(-50% → 0) loop is seamless.
-//    Source = transparent character cutouts from assets/chars/_chars.json;
-//    falls back to game thumbnails while no characters are registered. ──
-async function buildBelt() {
-  const el = document.getElementById('bg-belt');
-  if (!el) return;
-
-  let imgs = [];
-  let usingChars = false;
-  try {
-    const r = await fetch(BASE + 'assets/chars/_chars.json');
-    if (r.ok) {
-      const names = await r.json();
-      if (Array.isArray(names) && names.length) {
-        imgs = names.map(n => 'assets/chars/' + n);
-        usingChars = true;
-      }
-    }
-  } catch (_) { /* no manifest yet → fall back below */ }
-
-  if (!imgs.length) imgs = GAMES.map(g => g.thumbnail).filter(Boolean);
-  if (!imgs.length) return;
-
-  el.classList.toggle('is-chars', usingChars);
-  const thumbs = imgs;
-
-  const shuffle = arr => {
-    const a = arr.slice();
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  };
-
-  const rows = Math.ceil(window.innerHeight / 130) + 1;
-  const perRow = 14; // tiles per half before duplication
-
-  let html = '';
-  for (let r = 0; r < rows; r++) {
-    let seq = [];
-    while (seq.length < perRow) seq = seq.concat(shuffle(thumbs));
-    seq = seq.slice(0, perRow);
-
-    const tiles = seq.concat(seq).map(src => {
-      const rot = (Math.random() * 14 - 7).toFixed(1); // -7°..+7° brick tilt
-      return `<img src="${src}" alt="" aria-hidden="true" style="--r:${rot}deg">`;
-    }).join('');
-
-    const dur = (48 + Math.random() * 42).toFixed(1);   // 48–90s, varied speed
-    const offset = Math.floor(Math.random() * 130);     // brick stagger per row
-    html += `<div class="belt-row" style="animation-duration:${dur}s;margin-left:-${offset}px">${tiles}</div>`;
-  }
-  el.innerHTML = html;
 }
 
 // ── Controls ──
