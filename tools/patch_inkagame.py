@@ -482,7 +482,7 @@ def generate_index_html(vault, game_id, title, year):
     ok(f"index.html generated: {target}")
 
 
-def update_games_json(vault, game_id, title):
+def update_games_json(vault, game_id, title, year=None):
     games_json = vault / "_games.json"
     games = json.loads(games_json.read_text(encoding="utf-8"))
     # Check if already present
@@ -490,12 +490,17 @@ def update_games_json(vault, game_id, title):
         if g.get("id") == game_id:
             log(f"Game '{game_id}' already in _games.json - skipping")
             return
-    games.append({
+    entry = {
         "id": game_id,
         "title": title,
         "thumbnail": f"games/{game_id}/thumbnail.png",
         "status": "patched",
-    })
+        "category": "inkagames",  # this script only patches Inkagames engines
+    }
+    # year drives the catalog "Order by year" sort; store as int when numeric
+    if year is not None and str(year).isdigit():
+        entry["year"] = int(year)
+    games.append(entry)
     games_json.write_text(json.dumps(games, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     ok(f"_games.json updated ({len(games)} games)")
 
@@ -596,7 +601,7 @@ def main():
         game_dir = deploy_swf(patched_swf, paths["vault"], args.id)
         deploy_thumbnail(paths["thumb"], game_dir)
         generate_index_html(paths["vault"], args.id, args.title, args.year)
-        update_games_json(paths["vault"], args.id, args.title)
+        update_games_json(paths["vault"], args.id, args.title, args.year)
         update_sitemap(paths["vault"], args.id, args.title)
 
         ok(f"\n=== DONE ===")
