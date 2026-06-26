@@ -81,4 +81,18 @@
     </image:image>
   </url>
 
+
+  <!-- Fernanfloo Saw Game -->
+  <url>
+    <loc>https://seikios.com/games/fernanfloo-saw-game/</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://seikios.com/games/fernanfloo-saw-game/thumbnail.png</image:loc>
+      <image:title>Fernanfloo Saw Game</image:title>
+      <image:caption>Play Fernanfloo Saw Game free online &mdash; patched Flash game playable in your browser</image:caption>
+    </image:image>
+  </url>
+
 </urlset>

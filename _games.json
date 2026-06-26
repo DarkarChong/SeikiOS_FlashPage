@@ -38,5 +38,13 @@
     "status": "patched",
     "category": "inkagames",
     "year": 2010
+  },
+  {
+    "id": "fernanfloo-saw-game",
+    "title": "Fernanfloo Saw Game",
+    "thumbnail": "games/fernanfloo-saw-game/thumbnail.png",
+    "status": "patched",
+    "category": "inkagames",
+    "year": 2016
   }
 ]
